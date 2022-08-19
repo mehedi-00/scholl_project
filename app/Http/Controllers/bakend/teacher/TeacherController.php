@@ -20,15 +20,15 @@ class TeacherController extends Controller
     }
     
     public function index(){
-        $class = Sclass::with('Subject')->get();
-        // $class = Subject::with('Teacher')->get();
-    //    dd($class);
+        // $class = Sclass::with('Subject')->get();
+        $class = Sclass::with('subject.Teacher')->get();
+       //dd($class);
         return view('bakend.teacher.index',compact('class'));
     }
     public function create($cid,$sid){
       $classId = $cid;
       $subjectId = $sid;
-      $teacher = User::where('teacher', 1)->get();
+      $teacher = User::where('teacher',1)->get();
       return view('bakend.teacher.create',compact('teacher','classId','subjectId'));
     }
     public function addteacher(Request $request,$cid,$sid){
@@ -37,15 +37,14 @@ class TeacherController extends Controller
         $request->validate([
             'teacher' => 'required',
         ]);
-        $subject = Subject::find($sid);
-        $subject->Teacher()->sync($request->teacher_id);
+         $subject = Subject::find($sid);
+        // $class = Sclass::with('Subject')->whereHas('Subject', function($q){
+        //     $q->where('subject_name', 'Bangla');
+        // })->find($cid);
+        //  dd($class);
+        $subject->Teacher()->attach($request->teacher);
         
-        // $asignteacher = new subjectTeacher();
         
-        // $asignteacher->subject_id = $sid;
-        // $asignteacher->user_id = $request->teacher;
-
-        // $asignteacher->save();
-        return back();
+        return redirect()->route('teacher.index');
     }
 }

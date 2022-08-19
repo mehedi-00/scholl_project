@@ -14,7 +14,8 @@ class Subject extends Model
     public function Sclass(){
         return $this->belongsToMany(Sclass::class);
     }
-    public function Teacher(){
+    public function teacher()
+    {
         return $this->belongsToMany(User::class);
     }
 }

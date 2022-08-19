@@ -51,7 +51,7 @@ class User extends Authenticatable
         return $this->hasOne(EmployData::class);
     }
     
-    public function Subject(){
+    public function subject(){
         return $this->belongsToMany(Subject::class);
     }
 }

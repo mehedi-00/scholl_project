@@ -20,8 +20,9 @@
                                    <select name="teacher" id="" class="form-control">
                                     @foreach ($teacher as $data)
                                     <option value="{{ $data->id }}">{{ $data->name }}</option>
-                                </select>
                                     @endforeach
+                                </select>
+                                   
                                     
                                     <span class="text-danger">
                                         @error('class_name')
